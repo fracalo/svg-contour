@@ -1,0 +1,24 @@
+{
+  "name": "svg-contour",
+  "version": "1.0.0",
+  "description": "contours for svg",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "build": "browserify src/app.js -o example/bundle.js --debug",
+    "start": "cd example && http-server -a 0.0.0.0 -p 7777 -o",
+    "watch-serve-ex": "watchify src/app.js -o example/bundle.js --debug"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^13.1.1",
+    "eslint": "^3.10.2",
+    "http-server": "^0.9.0",
+    "mocha": "^3.1.2",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "ramda": "^0.22.1"
+  }
+}

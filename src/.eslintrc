@@ -1,0 +1,29 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    'eslint-config-airbnb-base',
+    'eslint-config-airbnb-base/rules/strict',
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+  },
+  "rules": {
+      "one-var": 1,
+      "no-console": 1,
+      "no-unused-vars": 1,
+      "comma-dangle": ["error", "never"],
+      "block-scoped-var": 0,
+      "quotes": [1, "single"],
+      "curly": 0,
+      "max-len": ["error", 150, 4, {"ignoreUrls": true}],
+      "no-use-before-define": 0,
+      "no-param-reassign": 0,
+      "no-nested-ternary": 0,
+      "brace-style": ["error", "stroustrup"],
+      "semi": ["warn", "never"],
+      "arrow-parens": 0,
+      "consistent-return": 0
+  }
+}

@@ -1,0 +1,21 @@
+body{
+  margin:0;
+}
+svg{
+  background: tan;
+  width: 99vw;
+  height: 99vh;
+}
+path{
+  stroke: black;
+  stroke-width:3;
+  fill: none;
+}
+circle{
+  r: 5;
+  fill: red;
+}
+line{
+  stroke:black;
+  stroke-width:1
+}
