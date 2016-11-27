@@ -1,7 +1,11 @@
 
 const { drawPoint } = require('./utils/draw')
 const contiguousBorderIntersection = require('./utils/contiguous-border-point-intersection')
-const getControlPoints = require('./utils/get-control-points')
+const getControlPoints = require('./utils/get-control-points').default
+const getPoints = require('./utils/get-control-points').getPoints
+const controlPolygonSegments = require('./utils/get-control-points').controlPolygonSegments
+const offsetLineSegmentIntersections = require('./utils/get-control-points').offsetLineSegmentIntersections
+const getContour = require('./utils/get-contour')
 const drawLine = require('./utils/draw-line')
 const pipe = require('./utils/pipe')
 
@@ -21,19 +25,15 @@ const svgContour = (el, op) => {
 
   const pathData = el.getPathData({ normalize: true })
 
-  const mergedControlPoints = pipe(
-    getControlPoints(Math.abs(offset)),
-    x => {console.log('after getControlPoints', x); return x},
-    contiguousBorderIntersection
-  )(pathData)
+  // const contourD = pipe(
+  //   getPoints,
+  //   controlPolygonSegments,
+  //   x => {console.log('what we got',;x); return x},
+  //   offsetLineSegmentIntersections(offset)
+  // )(pathData)
+  const contourD = getContour(10)(pathData)
 
-  const [dUp, dDown] = mergedControlPoints.reduce((ac, x) => {
-    ac[0].push(x.up)
-    ac[1].push(x.down)
-    return ac
-  }, [[], []])
-
-  const contourD = offset > 0 ? dUp : dDown
+  console.log('contourD', contourD)
   const contourPath = drawLine(style, contourD, el.getPathData({ normalize: true }))
 
   if (append)
@@ -50,7 +50,6 @@ const testStyles2 = {
   stroke: 'blue', stokeWidth: 1
 }
 
-console.log('ciao');
 /** *** **/
 const testP = document.querySelector('path')
 svgContour(testP, {

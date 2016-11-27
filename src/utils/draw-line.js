@@ -4,20 +4,14 @@ module.exports = drawLine
 
 const svgNS = 'http://www.w3.org/2000/svg'
 // const commandSize = {
-//   M: 2,
-//   L: 2,
-//   Q: 4,
-//   T: 2,
-//   C: 6,
-//   S: 4,
-//   Z: 0
+//   M: 2,   L: 2,   Q: 4,
+//   T: 2,   C: 6,   S: 4,   Z: 0
 //   // TODO missing A, H, V
 // }
 
 function drawLine(styles, dataPairs, pData) {
   const data = dataPairs.reduce((a, x) => (
-    Array.isArray(x) ?
-    [...a, ...x] : a
+    [...a, ...x]
   ), [])
   const p = document.createElementNS(svgNS, 'path')
   Object.assign(p.style, styles)

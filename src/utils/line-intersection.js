@@ -1,9 +1,10 @@
-module.exports = lineIntersection
+module.exports.lineIntersection = lineIntersection
+module.exports.lineFun = lineFun
 
 // lineIntersection :: (Segment, Segment) -> Point || true(in case same line) || false (if parallel)
-function lineIntersection(seg1, seg2) {
-  const line1 = lineFun(seg1)
-  const line2 = lineFun(seg2)
+function lineIntersection(line1, line2) {
+  // const line1 = lineFun(seg1)
+  // const line2 = lineFun(seg2)
 
   if (line1.vertical || line2.vertical) // deal with special case of vertical line
     return lineIntersectionWithVertical(line1, line2)

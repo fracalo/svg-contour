@@ -1,5 +1,8 @@
 const pipe = require('./pipe')
 const pointLerp = require('./point-lerp')
+const lineFun = require('./line-intersection').lineFun
+const lineIntersection = require('./line-intersection').lineIntersection
+const { Line, lineForSeg } = require('./line')
 
 // getPoints:: pathData -> [[Number, Number]]
 const getPoints = pd =>
@@ -35,7 +38,7 @@ const controlPolygonSegments = points => {
 // given an array of segments it calculates an Object
 // of point and delta for both points of segment
 // keeps the segments grouped in an array
-// y = m*x + c + d*sqrt(1+m^2);
+
 const segmentsAndDeltas = offset => segments =>
   segments.map(([p1, p2]) => ([
     { point: p1, delta: pointLerp(offset, p1, p2) },
@@ -82,8 +85,32 @@ const getControlPoints = offset => pipe(
 )
 
 module.exports.default = getControlPoints
-module.exports.getPoints = getPoints
+const zeroSeg = ([[x1, y1], [x2, y2]]) => x1 === x2 && y1 === y2
+const offsetLineSegmentIntersections = offset => segments =>
+segments.reduce((ac, x, i, arr) => {
+  if (i === 0)
+    ac.push(x[0])
+  else
+    ac.push(zeroSeg(x) ? null : segmentIntersections(offset)(x))
 
+  if (i === arr.length - 1)
+    ac.push(x[1])
+  return ac
+}, [])
+.map((x, i, arr) => x === null ? arr[i - 1] : x)
+
+const segmentIntersections = offset => ([seg1, seg2]) => {
+  const l1 = lineForSeg(seg1)
+  const l2 = lineForSeg(seg2)
+  const offsetL1 = l1.offset(offset)
+  const offsetL2 = l2.offset(offset)
+
+  return offsetL1.intersection(offsetL2)
+}
+
+module.exports.getPoints = getPoints
+module.exports.controlPolygonSegments = controlPolygonSegments
+module.exports.offsetLineSegmentIntersections = offsetLineSegmentIntersections
 
 // utility of pointDeltsSegments
 // in essence it turns the radPoint 90deg on either sides to get the up and down points
