@@ -29,31 +29,27 @@ const controlPolygonSegments = points =>
   }, [])
 
 
-const segmentsToLinePoints = segments => {
-  const rotatedLines = []
-  let i = -1
-  while (++i < segments.length) {
-    if (i === 0) {
-      const first = lineWithFallBackFrontward(segments[i].p1, segments, i)
-      rotatedLines.push(first)
-    }
-    const before = rotatedLines.slice(-1)[0]
-    if (segments[i].zeroLength()) {
-      rotatedLines.push(before)
-    }
-    else if (i < segments.length - 1) {
-      const after = lineWithFallBackFrontward(segments[i].p2, segments, i + 1)
-      const line = before && after ?
-        linesRotationLerp(segments[i].p2, before, after) :
-        before
-      rotatedLines.push(line)
-    }
-    else {
-      rotatedLines.push(segments[i].line(segments[i].p2))
-    }
+const segmentsToLinePoints = segments => segments.reduce((ac, s, i, arr) => {
+  if (i === 0) {
+    const first = lineWithFallBackFrontward(s.p1, arr, i)
+    ac.push(first)
   }
-  return rotatedLines
-}
+  const before = ac.slice(-1)[0]
+  if (s.zeroLength()) {
+    ac.push(before)
+  }
+  else if (i < arr.length - 1) {
+    const after = lineWithFallBackFrontward(s.p2, arr, i + 1)
+    const line = before && after ?
+      linesRotationLerp(s.p2, before, after) :
+      before
+    ac.push(line)
+  }
+  else {
+    ac.push(s.line(s.p2))
+  }
+  return ac
+}, [])
 function linesRotationLerp(center, segFrom, segTo) {
   const beforeRad = Math.atan(segFrom.m)
   const afterRad = Math.atan(segTo.m)
@@ -73,8 +69,10 @@ function lineWithFallBackFrontward(p, arr, index) {
 }
 
 // [Line] -> [Point]
-const offsetLinePoints = off => lines =>
-  lines.map(l => l.offset(off).projection(l.center))
+const offsetLinePoints = off => lines => {
+  console.log('off', off);
+  return lines.map(l => l.offset(off).projection(l.center))
+}
 
 
 module.exports = off => pipe(

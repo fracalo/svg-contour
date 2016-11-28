@@ -20,8 +20,9 @@ class Line {
     if (! isFinite(this.m))
       return new Line(this.m, this.inter - n)
 
-    const orthDisplacement = n * Math.sqrt(1 + Math.pow(this.m, 2))
-    return new Line(this.m, orthDisplacement)
+    const vertDisplacement = n * Math.sqrt(1 + Math.pow(this.m, 2)) + this.inter
+    // n / Math.cos(Math.atan(this.m)) + this.inter TODO check why this don't work
+    return new Line(this.m, vertDisplacement)
   }
   intersection(other) {
     // return either a Point : [Number, Number]
