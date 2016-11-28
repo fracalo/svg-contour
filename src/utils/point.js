@@ -7,8 +7,8 @@ class Point {
   isEqual(other) {
     return this.x === other.x && this.y === other.y
   }
-
 }
+
 Point.prototype[Symbol.iterator] = function* () {
   yield this.x
   yield this.y

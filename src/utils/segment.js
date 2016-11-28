@@ -30,4 +30,12 @@ class Segment {
   }
 }
 
+Segment.prototype[Symbol.iterator] = function* () {
+  yield this.p1.x
+  yield this.p1.y
+  yield this.p2.x
+  yield this.p2.y
+  return
+}
+
 module.exports = Segment

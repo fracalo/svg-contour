@@ -1,13 +1,12 @@
 
 const { drawPoint } = require('./utils/draw')
-const contiguousBorderIntersection = require('./utils/contiguous-border-point-intersection')
-const getControlPoints = require('./utils/get-control-points').default
-const getPoints = require('./utils/get-control-points').getPoints
-const controlPolygonSegments = require('./utils/get-control-points').controlPolygonSegments
-const offsetLineSegmentIntersections = require('./utils/get-control-points').offsetLineSegmentIntersections
+// const contiguousBorderIntersection = require('./utils/contiguous-border-point-intersection')
+// const getControlPoints = require('./utils/get-control-points').default
+// const getPoints = require('./utils/get-control-points').getPoints
+// const controlPolygonSegments = require('./utils/get-control-points').controlPolygonSegments
+// const offsetLineSegmentIntersections = require('./utils/get-control-points').offsetLineSegmentIntersections
 const getContour = require('./utils/get-contour')
 const drawLine = require('./utils/draw-line')
-const pipe = require('./utils/pipe')
 
 
 const svgContour = (el, op) => {
@@ -25,15 +24,9 @@ const svgContour = (el, op) => {
 
   const pathData = el.getPathData({ normalize: true })
 
-  // const contourD = pipe(
-  //   getPoints,
-  //   controlPolygonSegments,
-  //   x => {console.log('what we got',;x); return x},
-  //   offsetLineSegmentIntersections(offset)
-  // )(pathData)
-  const contourD = getContour(10)(pathData)
 
-  console.log('contourD', contourD)
+  const contourD = getContour(offset)(pathData)
+
   const contourPath = drawLine(style, contourD, el.getPathData({ normalize: true }))
 
   if (append)
@@ -44,14 +37,15 @@ const svgContour = (el, op) => {
 
 
 const testStyles = {
-  stroke: '#00ff00', stokeWidth: 1
+  stroke: 'navy', stokeWidth: 1
 }
-const testStyles2 = {
-  stroke: 'blue', stokeWidth: 1
-}
+
 
 /** *** **/
 const testP = document.querySelector('path')
 svgContour(testP, {
-  offset: -15, style: testStyles2
+  offset: 90, style: testStyles
+})
+svgContour(testP, {
+  offset: -90, style: testStyles
 })

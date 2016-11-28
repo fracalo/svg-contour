@@ -19,6 +19,5 @@
     "watchify": "^3.7.0"
   },
   "dependencies": {
-    "ramda": "^0.22.1"
   }
 }
