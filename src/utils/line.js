@@ -16,7 +16,10 @@ class Line {
       this.inter
     )
   }
-  offset(n) {
+  offset(n, reverse) {
+    if (reverse)
+      n = -n
+
     if (! isFinite(this.m))
       return new Line(this.m, this.inter - n)
 

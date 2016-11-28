@@ -10,8 +10,8 @@ const svgNS = 'http://www.w3.org/2000/svg'
 // }
 
 function drawLine(styles, dataPairs, pData) {
-  const data = dataPairs.reduce((a, x) => (
-    [...a, ...x]
+  const data = dataPairs.reduce((a, s) => (
+    [...a, ...s]
   ), [])
   const p = document.createElementNS(svgNS, 'path')
   Object.assign(p.style, styles)

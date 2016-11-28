@@ -6,7 +6,8 @@ class Segment {
   constructor(p1, p2) {
     this.p1 = p1 instanceof Point ? p1 : new Point(p1[0], p1[1])
     this.p2 = p2 instanceof Point ? p2 : new Point(p2[0], p2[1])
-    this.m = (this.p1.y - this.p2.y) / (this.p1.x - this.p2.x)
+    this.m = (this.p2.y - this.p1.y) / (this.p2.x - this.p1.x)
+    this.reverse = this.p2.x < this.p1.x || (!isFinite(this.m) && this.p1.y > this.p2.y)
   }
   getLineOrPoint() {
     return (
@@ -30,12 +31,5 @@ class Segment {
   }
 }
 
-Segment.prototype[Symbol.iterator] = function* () {
-  yield this.p1.x
-  yield this.p1.y
-  yield this.p2.x
-  yield this.p2.y
-  return
-}
 
 module.exports = Segment

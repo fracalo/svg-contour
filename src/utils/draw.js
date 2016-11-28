@@ -8,9 +8,29 @@ const drawPoint = (p, col) => {
   el.style.fill = col
   svg.appendChild(el)
 }
-
 exports.drawPoint = drawPoint
 
+const drawSeg = (from, to) => {
+  const f = circleCreator(from)
+  f.style.fill = 'white'
+  const t = circleCreator(to)
+  t.style.fill = 'magenta'
+  const l = lineCreator(from, to)
+  const els = [f, t, l]
+  els.forEach(x => svg.appendChild(x))
+}
+exports.drawSeg = drawSeg
+
+function lineCreator(from, to) {
+  const [x1, y1] = from
+  const [x2, y2] = to
+  const el = document.createElementNS(svgNS, 'line')
+  el.setAttribute('x1', x1)
+  el.setAttribute('y1', y1)
+  el.setAttribute('y2', y2)
+  el.setAttribute('x2', x2)
+  return el
+}
 // assuming a path of only M and C TODO
 const divideInVector = pd =>
   pd.reduce((ac, x) => {
@@ -39,8 +59,8 @@ const getPoints = (pd) => pd.reduce((ac, x) => {
 const listOfCircles = (list) => list.map(circleCreator)
 const circleCreator = (a) => {
   const el = document.createElementNS(svgNS, 'circle')
-  el.setAttribute('cx', a[0])
-  el.setAttribute('cy', a[1])
+  el.setAttribute('cx', a.x)
+  el.setAttribute('cy', a.y)
   return el
 }
 
@@ -61,12 +81,6 @@ const pointsFragment = points => points.reduce((ac, x) => {
   return ac
 }, document.createDocumentFragment())
 
-const pathDataToHandles = pipe(
-  getPoints,
-  listOfCircles,
-  colorize,
-  pointsFragment
-)
 
 // const datas = paths.map(x => x.getPathData())
 //                       .map(pathDataToHandles)

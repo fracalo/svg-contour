@@ -24,7 +24,6 @@ const svgContour = (el, op) => {
 
   const pathData = el.getPathData({ normalize: true })
 
-
   const contourD = getContour(offset)(pathData)
 
   const contourPath = drawLine(style, contourD, el.getPathData({ normalize: true }))
@@ -42,10 +41,7 @@ const testStyles = {
 
 
 /** *** **/
-const testP = document.querySelector('path')
+const testP = document.querySelector('path#one')
 svgContour(testP, {
-  offset: 90, style: testStyles
-})
-svgContour(testP, {
-  offset: -90, style: testStyles
+  offset: 40, style: testStyles
 })

@@ -2,7 +2,7 @@ const pipe = require('./pipe')
 const Point = require('./point')
 const Segment = require('./segment')
 // drawPoint for test
-// const { drawPoint } = require('./draw')
+const { drawSeg } = require('./draw')
 
 // getPoints:: pathData -> [Point]
 const getPoints = pd =>
@@ -27,39 +27,29 @@ const controlPolygonSegments = points =>
     return ac
   }, [])
 
-// [Segment] -> [Segment, Null]
-const offsetSegments = off => segments => segments.map(s => {
-  if (s.zeroLength())
-    return null
 
-  const offsetLine = s.line().offset(off)
-  const offsetPoints = new Segment(
-    offsetLine.projection(s.p1),
-    offsetLine.projection(s.p2)
-  )
-  return offsetPoints
-})
 // [Segment] -> [Point, Null]
-const offsetSegmentsControlPoints = off => segments => segments.reduce((ac, s, i, arr) => {
-  const offsetLine = s.zeroLength() ? null : s.line().offset(off)
+const offsetControlSegments = off => segments => segments.reduce((ac, s, i, arr) => {
+  // keep track of slope changes
+  const offsetLine = s.zeroLength() ? null : s.line().offset(off, s.reverse)
 
   if (i === 0) {
     if (!offsetLine)
       ac.push(null)
     else {
-      ac.push(offsetLine.projection(s.p1))
+      ac.push(new Segment(s.p1, offsetLine.projection(s.p1)))
     }
   }
-
   if (i < arr.length - 1) {
     if (!offsetLine)
       ac.push(null)
     else {
       const followingValidSeg = nonZerolengthfallFront(arr, i)
+      const rev = followingValidSeg.reverse
       ac.push(
         followingValidSeg ?
-        offsetLine.intersection(followingValidSeg.line().offset(off)) :
-        offsetLine.projection(s.p2)
+        new Segment(s.p2, offsetLine.intersection(followingValidSeg.line().offset(off, rev))) :
+        new Segment(s.p2, offsetLine.projection(s.p2))
       )
     }
   }
@@ -67,7 +57,7 @@ const offsetSegmentsControlPoints = off => segments => segments.reduce((ac, s, i
     if (!offsetLine)
       ac.push(null)
     else
-      ac.push(offsetLine.projection(s.p2))
+      ac.push(new Segment(s.p2, offsetLine.projection(s.p2)))
   }
   return ac
 }, [])
@@ -99,40 +89,21 @@ function fallbackCp(arr, i) {
   throw new Error('all zeroLength segments')
 }
 
-// utility of fallbackForZeroLength
-// function lookFor2Points(arr, i) {
-//   const p2 = pointWithFallBackFrontward(arr, i)
-//   const p1 = i === 0 ? p2 : arr[i - 1].p2
-//   if (!p1 && !p2) throw new Error('all zeroLength segments')
-//   return (
-//     p1 && p2 ?
-//     new Segment(p1, p2) :
-//     new Segment(p1, p1) // if at the end there's no valid point repeat p1
-//   )
-// }
-// // utility of lookFor2Points
-// function pointWithFallBackFrontward(arr, index) {
-//   let i = index - 1
-//   while (++i < arr.length) {
-//     if (arr[i])
-//       return arr[i].p1
-//   }
-//   return null
-// }
-
+const mapToPointOfSeg = segments => segments.map(x => x.p2)
 module.exports = off => pipe(
     getPoints,
     controlPolygonSegments,
-    offsetSegmentsControlPoints(off),
-    (x => x.map(s => {
-      console.log('s', s)
-      return s
-    })),
+    (x => {
+      console.log('this is : ', x)
+      return x
+    }),
+    offsetControlSegments(off),
     fallbackForZeroLength,
     (x => x.map(s => {
-      console.log('fallbacked', s)
+      drawSeg(s.p1, s.p2)
       return s
-    }))
+    })),
+    mapToPointOfSeg
   )
 
 

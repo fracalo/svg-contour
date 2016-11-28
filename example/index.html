@@ -7,13 +7,22 @@
 <body>
 
 <svg viewBox='-300 -300 600 600'>
-<line x1=0 y1=-300 x2=0 y2=300 />
-<line y1=0 x1=-300 y2=0 x2=300 />
+  <marker id="Triangle"
+            refX="14" refY="0"
+            markerWidth="10"
+            markerHeight="16"
+            orient="auto"
+            fill ="#fff"
+            viewBox="0 -10 15 20" >
+        <path d="M 0 -10 L 0 10 L 15 0 z" />
+  </marker>
+  <line x1=0 y1=-300 x2=0 y2=300 marker-end="url(#Triangle)" />
+  <line y1=0 x1=-300 y2=0 x2=300 marker-end="url(#Triangle)" />
 
 
-<path id='one' d='M-100,0 C0,100 100,100 99,-220' />
-<!-- <path d="M10 315 L 110 215 A 30 50 0 0 1 162.55 162.45 l 100 -100 H 100" />
-<ellipse cx="60" cy="60" rx="50" ry="25"/> -->
+  <path id='one' d='M-100,-100 C-10,100 0,100 100,0 L200,0 l0,200' />
+  <!-- <path d="M10 315 L 110 215 A 30 50 0 0 1 162.55 162.45 l 100 -100 H 100" />
+  <ellipse cx="60" cy="60" rx="50" ry="25"/> -->
 </svg>
 
 
