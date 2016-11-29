@@ -93,10 +93,6 @@ const mapToPointOfSeg = segments => segments.map(x => x.p2)
 module.exports = off => pipe(
     getPoints,
     controlPolygonSegments,
-    (x => {
-      console.log('this is : ', x)
-      return x
-    }),
     offsetControlSegments(off),
     fallbackForZeroLength,
     (x => x.map(s => {
@@ -105,43 +101,3 @@ module.exports = off => pipe(
     })),
     mapToPointOfSeg
   )
-
-
-  // const segmentsToLinePoints = segments => segments.reduce((ac, s, i, arr) => {
-  //   if (i === 0) {
-  //     const first = lineWithFallBackFrontward(s.p1, arr, i)
-  //     ac.push(first)
-  //   }
-  //   const before = ac.slice(-1)[0]
-  //   if (s.zeroLength()) {
-  //     ac.push(before)
-  //   }
-  //   else if (i < arr.length - 1) {
-  //     const after = lineWithFallBackFrontward(s.p2, arr, i + 1)
-  //     const line = before && after ?
-  //       linesRotationLerp(s.p2, before, after) :
-  //       before
-  //     ac.push(line)
-  //   }
-  //   else {
-  //     ac.push(s.line(s.p2))
-  //   }
-  //   return ac
-  // }, [])
-  // function linesRotationLerp(center, segFrom, segTo) {
-  //   const beforeRad = Math.atan(segFrom.m)
-  //   const afterRad = Math.atan(segTo.m)
-  //   const increment = (afterRad - beforeRad) / 2
-  //   const m = Math.tan(beforeRad + increment)
-  //   const inter = isFinite(m) ?
-  //   center.y + m * -center.x :
-  //   center.x
-  //   return new Line(m, inter, center)
-  // }
-  // function lineWithFallBackFrontward(p, arr, index) {
-  //   let i = index - 1
-  //   while (++i < arr.length) {
-  //     if (! arr[i].zeroLength())
-  //       return arr[i].line(p)
-  //   }
-  // }

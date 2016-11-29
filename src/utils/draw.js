@@ -1,6 +1,11 @@
+/**
+ * this file has some testing functions that can draw
+ * segments points etc.
+ * NB not used in production
+ */
+
 const svgNS = 'http://www.w3.org/2000/svg'
 const svg = document.querySelector('svg')
-const pipe = require('./pipe')
 
 
 const drawPoint = (p, col) => {
@@ -12,7 +17,7 @@ exports.drawPoint = drawPoint
 
 const drawSeg = (from, to) => {
   const f = circleCreator(from)
-  f.style.fill = 'white'
+  f.style.fill = 'lime'
   const t = circleCreator(to)
   t.style.fill = 'magenta'
   const l = lineCreator(from, to)

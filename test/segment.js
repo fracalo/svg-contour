@@ -22,7 +22,7 @@ describe('vertical line', () => {
     assert.equal(line.inter, 1)
   })
 })
-describe('standare line', () => {
+describe('standar line', () => {
   before(() => {
     seg = new Segment([0,2], [5, 0])
     line = seg.line()
@@ -34,6 +34,7 @@ describe('standare line', () => {
     assert.equal(line.inter, 2)
   })
 })
+
 describe('standare line2', () => {
   before(() => {
     seg = new Segment([-2,0], [0, 2])
@@ -44,6 +45,16 @@ describe('standare line2', () => {
   })
   it('should have  inter of 2', () => {
     assert.equal(line.inter, 2)
+  })
+})
+describe('standar line3', () => {
+  before(() => {
+    seg = new Segment([100, 100], [99, -220])
+    line = seg.line()
+  })
+  it('should have m < 0', () => {
+    console.log('seg', seg);
+    assert.equal(seg.m , -320)
   })
 })
 describe('zeroLength', () => {

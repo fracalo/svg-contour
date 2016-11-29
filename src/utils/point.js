@@ -13,4 +13,5 @@ Point.prototype[Symbol.iterator] = function* () {
   yield this.x
   yield this.y
 }
+
 module.exports = Point

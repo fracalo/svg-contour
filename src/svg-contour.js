@@ -1,11 +1,5 @@
 
-const { drawPoint } = require('./utils/draw')
-// const contiguousBorderIntersection = require('./utils/contiguous-border-point-intersection')
-// const getControlPoints = require('./utils/get-control-points').default
-// const getPoints = require('./utils/get-control-points').getPoints
-// const controlPolygonSegments = require('./utils/get-control-points').controlPolygonSegments
-// const offsetLineSegmentIntersections = require('./utils/get-control-points').offsetLineSegmentIntersections
-const getContour = require('./utils/get-contour')
+const contourPathData = require('./utils/contour-path-data')
 const drawLine = require('./utils/draw-line')
 
 
@@ -23,9 +17,7 @@ const svgContour = (el, op) => {
     throw Error('svgContour append option must be a object')
 
   const pathData = el.getPathData({ normalize: true })
-
-  const contourD = getContour(offset)(pathData)
-
+  const contourD = contourPathData(offset)(pathData)
   const contourPath = drawLine(style, contourD, el.getPathData({ normalize: true }))
 
   if (append)
@@ -34,14 +26,4 @@ const svgContour = (el, op) => {
   return contourPath
 }
 
-
-const testStyles = {
-  stroke: 'navy', stokeWidth: 1
-}
-
-
-/** *** **/
-const testP = document.querySelector('path#one')
-svgContour(testP, {
-  offset: 40, style: testStyles
-})
+module.exports = svgContour
