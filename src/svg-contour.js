@@ -1,4 +1,4 @@
-
+const redrawSteep = require('./utils/redraw-steep-curve')
 const contourPathData = require('./utils/contour-path-data')
 const drawLine = require('./utils/draw-line')
 
@@ -17,8 +17,9 @@ const svgContour = (el, op) => {
     throw Error('svgContour append option must be a object')
 
   const pathData = el.getPathData({ normalize: true })
-  const contourD = contourPathData(offset)(pathData)
-  const contourPath = drawLine(style, contourD, el.getPathData({ normalize: true }))
+  const flattenedPathData = redrawSteep(0.2)(pathData)
+  const contourD = contourPathData(offset)(flattenedPathData)
+  const contourPath = drawLine(style, contourD, flattenedPathData)// el.getPathData({ normalize: true }))
 
   if (append)
     el.parentElement.appendChild(contourPath)

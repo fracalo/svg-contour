@@ -8,6 +8,7 @@
 
 <svg viewBox='-300 -300 600 600'>
   <marker id="Triangle"
+            stroke='#000'
             refX="14" refY="0"
             markerWidth="10"
             markerHeight="16"
@@ -20,7 +21,10 @@
   <line y1=0 x1=-300 y2=0 x2=300 marker-end="url(#Triangle)" />
 
 
-  <path id='one' d='M-100,-100 C-10,100 0,100 100,0 L200,0 l0,200' />
+  <path id='one' stroke='#000' d='M-100,-100 C-10,100 0,100 100,0 L200,0 l0,200 C300,100 300,100 200,-100' />
+  <path id='flat' stroke='red' d='M-100,-100 C0,-200 0,-200 100,-100  C200,0 250,0 300,-100' />
+  <path id='flatQ' stroke='purple' d='M-100,-100 Q0,-200 100,-100' />
+  <!-- <path id='nn' stroke='gold' d='C-200,-200 -100,-200 100,-100' /> -->
   <!-- <path d="M10 315 L 110 215 A 30 50 0 0 1 162.55 162.45 l 100 -100 H 100" />
   <ellipse cx="60" cy="60" rx="50" ry="25"/> -->
 </svg>

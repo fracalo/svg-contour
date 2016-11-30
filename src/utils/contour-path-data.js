@@ -30,8 +30,8 @@ const controlPolygonSegments = points =>
 
 // [Segment] -> [Point, Null]
 const offsetControlSegments = off => segments => segments.reduce((ac, s, i, arr) => {
-  // keep track of slope changes
-  const offsetLine = s.zeroLength() ? null : s.line().offset(off, s.reverse)
+  // keep track of slope changes through reverse property
+  const offsetLine = s.zeroLength() ? null : s.line(s.p2).offset(off, s.reverse)
 
   if (i === 0) {
     if (!offsetLine)
@@ -48,7 +48,7 @@ const offsetControlSegments = off => segments => segments.reduce((ac, s, i, arr)
       const rev = followingValidSeg.reverse
       ac.push(
         followingValidSeg ?
-        new Segment(s.p2, offsetLine.intersection(followingValidSeg.line().offset(off, rev))) :
+        new Segment(s.p2, offsetLine.intersection(followingValidSeg.line(s.p2).offset(off, rev))) :
         new Segment(s.p2, offsetLine.projection(s.p2))
       )
     }

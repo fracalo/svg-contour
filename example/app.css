@@ -6,7 +6,6 @@ svg{
   height: 99vh;
 }
 path{
-  stroke: black;
   stroke-width:3;
   fill: none;
 }

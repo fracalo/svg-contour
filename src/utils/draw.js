@@ -7,7 +7,13 @@
 const svgNS = 'http://www.w3.org/2000/svg'
 const svg = document.querySelector('svg')
 
-
+exports.drawPath = (pd, c) => {
+  const el = document.createElementNS(svgNS, 'path')
+  el.setPathData(pd)
+  el.style.stroke = c
+  el.style.strokeWidth = 4
+  svg.appendChild(el)
+}
 const drawPoint = (p, col) => {
   const el = circleCreator(p)
   el.style.fill = col
@@ -50,6 +56,20 @@ const divideInVector = pd =>
 
 exports.divideInVector = divideInVector
 
+exports.drawCubic = function drawCubic(data, c) {
+  const el = createCubic(data)
+  el.style.stroke = c
+  svg.appendChild(el)
+}
+function createCubic(data) {
+  const [p1, c1, c2, p2] = data
+  const el = document.createElementNS(svgNS, 'path')
+  el.setPathData([
+    { type: 'M', values: [...p1] },
+    { type: 'C', values: [...c1, ...c2, ...p2] }
+  ])
+  return el
+}
 
 // getPoints Object -> [[Number, Number]]
 const getPoints = (pd) => pd.reduce((ac, x) => {
