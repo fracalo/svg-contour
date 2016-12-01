@@ -34,10 +34,14 @@ class Line {
   }
   intersection(other) {
     // return either a Point : [Number, Number]
-    // true in case it's the same line
-    // false in case parallel
-    if (this.vertical && other.vertical)
-      return this.inter === other.inter
+    // or throw
+
+    if (this.vertical && other.vertical) {
+      if (this.inter !== other.inter) {
+        throw new Error('parallel vertical lines don\'t intersect')
+      }
+      return other.center || this.center
+    }
     if (this.vertical)
       return new Point(this.inter, other.func(this.inter))
     if (other.vertical)

@@ -35,7 +35,7 @@ describe('standar line', () => {
   })
 })
 
-describe('standare line2', () => {
+describe('standar line2', () => {
   before(() => {
     seg = new Segment([-2,0], [0, 2])
     line = seg.line()
@@ -53,8 +53,7 @@ describe('standar line3', () => {
     line = seg.line()
   })
   it('should have m < 0', () => {
-    console.log('seg', seg);
-    assert.equal(seg.m , -320)
+    assert.equal(seg.m , 320)
   })
 })
 describe('zeroLength', () => {

@@ -39,3 +39,10 @@ svgContour(ellipse, {
 ```
 
 Svg contour relies on [**getPathData() and setPathData() polyfill**](https://github.com/jarek-foksa/path-data-polyfill.js) for polyfilling and normalizing pathData.
+
+TODO
+---
+ - Decide how to ship the svgContour feature (prototype, function , ...)
+ - ~~Breakup curve into smaller curve when too steep~~
+ - Find ratio between steepness and offset size
+ - Define a [fill modes, and regions options](https://svgwg.org/specs/strokes/#SpecifyingStrokeAlignment)

@@ -49,14 +49,10 @@ const redrawSteepCurve = flatRatio => pd =>
 
 const simplifyPoints = pathdata =>
   pathdata.reduce((ac, ps, i, arr) => {
-    if (ps.type === 'L') { // we suppose L will never be first point..
+    if (ps.type === 'L' && i < arr.length - 1) { // we suppose L will never be first point..
       const current = new Point(...ps.values)
       const leading = new Point(...arr[i - 1].values.slice(-2))
-      const following =
-        i < arr.length - 1 && arr[i + 1].type !== 'Z' ?
-        new Point(...arr[i + 1].values.slice(-2)) :
-        null
-      if (current.isEqual(leading) || (following && current.isEqual(following)))
+      if (current.isEqual(leading))
         return ac
     }
     return [...ac, ps]

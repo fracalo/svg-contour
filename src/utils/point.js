@@ -1,8 +1,8 @@
 
 class Point {
   constructor(x, y) {
-    this.x = x
-    this.y = y
+    this.x = Number(x.toPrecision(5))
+    this.y = Number(y.toPrecision(5))
   }
   isEqual(other) {
     return this.x === other.x && this.y === other.y

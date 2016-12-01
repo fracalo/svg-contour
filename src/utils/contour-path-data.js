@@ -34,8 +34,12 @@ const offsetControlSegments = off => segments => segments.reduce((ac, s, i, arr)
   const offsetLine = s.zeroLength() ? null : s.line(s.p2).offset(off, s.reverse)
 
   if (i === 0) {
-    if (!offsetLine)
-      ac.push(null)
+    if (!offsetLine) {
+      const followingValidSeg = nonZerolengthfallFront(arr, i)
+      const rev = followingValidSeg.reverse
+      const offsetFirstPoint = followingValidSeg.line().offset(off, rev).projection(s.p1)
+      ac.push(new Segment(s.p1, offsetFirstPoint))
+    }
     else {
       ac.push(new Segment(s.p1, offsetLine.projection(s.p1)))
     }
@@ -95,9 +99,11 @@ module.exports = off => pipe(
     controlPolygonSegments,
     offsetControlSegments(off),
     fallbackForZeroLength,
-    (x => x.map(s => {
-      drawSeg(s.p1, s.p2)
-      return s
-    })),
+    (x => {
+      x.forEach(s => {
+        drawSeg(s.p1, s.p2)
+      })
+      return x
+    }),
     mapToPointOfSeg
   )

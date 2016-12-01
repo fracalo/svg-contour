@@ -17,9 +17,9 @@ const svgContour = (el, op) => {
     throw Error('svgContour append option must be a object')
 
   const pathData = el.getPathData({ normalize: true })
-  const flattenedPathData = redrawSteep(0.2)(pathData)
+  const flattenedPathData = redrawSteep(0.3)(pathData) // TODO steepness should be somehow related to offness
   const contourD = contourPathData(offset)(flattenedPathData)
-  const contourPath = drawLine(style, contourD, flattenedPathData)// el.getPathData({ normalize: true }))
+  const contourPath = drawLine(style, contourD, flattenedPathData)
 
   if (append)
     el.parentElement.appendChild(contourPath)
