@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "build": "browserify src -o example/bundle.js",
-    "start": "npm run watch-serve-ex & npm run build-ex",
-    "watch-serve-ex": "watchify src/example-app.js -o example/bundle.js --debug",
-    "build-ex": "cd example && http-server -a 0.0.0.0 -p 7777 -o"
+    "build": "browserify src -o dist/svg-contour.js",
+    "start": "npm run watch-serve-example & npm run example",
+    "watch-serve-example": "watchify src -o example/svg-contour.js --debug",
+    "example": "cd example && http-server -a 0.0.0.0 -p 7777 -o"
   },
   "repository": {
   "type": "git",

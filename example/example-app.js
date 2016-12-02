@@ -1,9 +1,5 @@
 
-require('./path-data-polyfill')
-const svgContour = require('./svg-contour')
-
-window.svgContour = svgContour
-/** *** **/
+/* global svgContour */
 const testPath = document.querySelector('#flatQ')
 const offsetPath = svgContour(testPath, {
   offset: -40,

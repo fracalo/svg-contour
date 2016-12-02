@@ -52,14 +52,14 @@ TODO
  - Find reasonable ratio between steepness and offset size
  - Define a [fill modes, and regions option](https://svgwg.org/specs/strokes/#SpecifyingStrokeAlignment)
  - Define behaviour on closed paths
- - Transpilling is yet to be defined
+ - Transpiling is yet to be defined
 
 
 
 #### Npm scripts
 
- Running `npm start` an example build (`src/example-app.js > example/bundle.js`) will be built (and watched on)
- & the example folder will be served through http-server (http://127.0.0.1:7777/).
+ Running `npm start` a build from src/ will be built (and watched on) in the /example folder,
+ the example folder will also be served through http-server (http://127.0.0.1:7777/).
 
 
  The dist folder contains a distribution build ready for in browser use.
