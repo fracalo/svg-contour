@@ -22,19 +22,23 @@ The options available for the configuration are:
  if not specified the style object of the originating element are used.
 
 
- The function returns the outline path element.
+The function returns the outline path element.
 
- Example
- ------
+Example
+------
  ```javascript
 const path = document.querySelector('path')
-
 svgContour(path, 10)
 
 const ellipse = document.querySelector('ellipse')
 svgContour(ellipse, {
-  offset: -5,
-  style: { strokeWidth: 1, strokeDasharray: '1,3', stroke: '#00ff00', fill: 'none' }
+      offset: -5,
+      style: {
+        strokeWidth: 1,
+        strokeDasharray: '1,3',
+        stroke: '#00ff00',
+        fill: 'none'
+      }
 })
 ```
 
@@ -53,7 +57,8 @@ TODO
 
 #### Npm scripts
 
- Running `npm start` an example build (`src/example-app.js > example/bundle.js`) will be built (and wathced on) & the example folder will be served through http-server.
+ Running `npm start` an example build (`src/example-app.js > example/bundle.js`) will be built (and watched on)
+ & the example folder will be served through http-server.
 
 
  The dist folder contains a distribution build ready for in browser use.
