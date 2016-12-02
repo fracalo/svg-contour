@@ -38,11 +38,22 @@ svgContour(ellipse, {
 })
 ```
 
-Svg contour relies on [**getPathData() and setPathData() polyfill**](https://github.com/jarek-foksa/path-data-polyfill.js) for polyfilling and normalizing pathData.
+Svg contour relies on [**getPathData() and setPathData() polyfill**](https://github.com/jarek-foksa/path-data-polyfill.js) for polyfilling and normalizing pathData. Currently the polyfill is provided directly in the build but in the next releases it will be most probably moved out.
 
 TODO
 ---
- - Decide how to ship the svgContour feature (prototype, function , ...)
+ - Decide how/if to ship the svgContour outside browser  
+ (currently the function is attached on window object)
  - ~~Breakup curve into smaller curve when too steep~~
  - Find ratio between steepness and offset size
- - Define a [fill modes, and regions options](https://svgwg.org/specs/strokes/#SpecifyingStrokeAlignment)
+ - Define a [fill modes, and regions option](https://svgwg.org/specs/strokes/#SpecifyingStrokeAlignment)
+ - Define behaviour on closed paths
+
+
+
+#### Npm scripts
+
+ Running `npm start` an example build (`src/example-app.js > example/bundle.js`) will be built (and wathced on) & the example folder will be served through http-server.
+
+
+ The dist folder contains a distribution build ready for in browser use.

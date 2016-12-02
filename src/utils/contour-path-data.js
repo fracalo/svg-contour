@@ -99,11 +99,11 @@ module.exports = off => pipe(
     controlPolygonSegments,
     offsetControlSegments(off),
     fallbackForZeroLength,
-    (x => {
-      x.forEach(s => {
-        drawSeg(s.p1, s.p2)
-      })
-      return x
-    }),
+    // (x => {
+    //   x.forEach(s => {
+    //     drawSeg(s.p1, s.p2)
+    //   })
+    //   return x
+    // }),
     mapToPointOfSeg
   )
