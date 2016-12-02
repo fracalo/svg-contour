@@ -10,7 +10,11 @@
     "watch-serve-ex": "watchify src/example-app.js -o example/bundle.js --debug",
     "build-ex": "cd example && http-server -a 0.0.0.0 -p 7777 -o"
   },
-  "author": "",
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/fracalo/svg-contour"
+  },
+  "author": "Francesco Calo",
   "license": "ISC",
   "devDependencies": {
     "browserify": "^13.1.1",

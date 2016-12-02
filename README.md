@@ -52,6 +52,7 @@ TODO
  - Find reasonable ratio between steepness and offset size
  - Define a [fill modes, and regions option](https://svgwg.org/specs/strokes/#SpecifyingStrokeAlignment)
  - Define behaviour on closed paths
+ - Transpilling is yet to be defined
 
 
 
