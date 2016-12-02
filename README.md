@@ -9,7 +9,7 @@ svgContour(elem, config);
 ```
 
 The second parameter to the function can either be a number or a configuration object,  
-in case the config form is used the offset must specified in the object.
+in case the config form is used the offset must be specified in the object.
 
 The options available for the configuration are:
  - `offset: Number` *required*  
@@ -19,7 +19,7 @@ The options available for the configuration are:
  if set to false the newly created element won't be attached.
  - `style: [Object]`  
  this object is merged into the new element's style object (the properties must be in camel case format),  
- if not specified the style object of the originating element are used.
+ if not specified the style object of the originating element is used and common path attributes are copied if defined.
 
 
 The function returns the outline path element.
@@ -49,7 +49,7 @@ TODO
  - Decide how/if to ship the svgContour outside browser  
  (currently the function is attached on window object)
  - ~~Breakup curve into smaller curve when too steep~~
- - Find ratio between steepness and offset size
+ - Find reasonable ratio between steepness and offset size
  - Define a [fill modes, and regions option](https://svgwg.org/specs/strokes/#SpecifyingStrokeAlignment)
  - Define behaviour on closed paths
 
@@ -58,7 +58,7 @@ TODO
 #### Npm scripts
 
  Running `npm start` an example build (`src/example-app.js > example/bundle.js`) will be built (and watched on)
- & the example folder will be served through http-server.
+ & the example folder will be served through http-server (http://127.0.0.1:7777/).
 
 
  The dist folder contains a distribution build ready for in browser use.
