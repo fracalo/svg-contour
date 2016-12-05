@@ -1,5 +1,5 @@
 
-class Point {
+export default class Point {
   constructor(x, y) {
     this.x = Number(x.toPrecision(5))
     this.y = Number(y.toPrecision(5))
@@ -24,5 +24,3 @@ Point.prototype[Symbol.iterator] = function* () {
   yield this.x
   yield this.y
 }
-
-module.exports = Point

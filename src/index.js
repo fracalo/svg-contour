@@ -1,5 +1,5 @@
-require('./path-data-polyfill')
-const svgContour = require('./svg-contour')
+import './path-data-polyfill'
+import svgContour from './svg-contour'
 
 if (typeof window === 'undefined')
   throw new Error('svgContour is developed for browser only, \n' +

@@ -7,21 +7,21 @@
 const svgNS = 'http://www.w3.org/2000/svg'
 const svg = document.querySelector('svg')
 
-exports.drawPath = (pd, c) => {
+export const drawPath = (pd, c) => {
   const el = document.createElementNS(svgNS, 'path')
   el.setPathData(pd)
   el.style.stroke = c
   el.style.strokeWidth = 4
   svg.appendChild(el)
 }
-const drawPoint = (p, col) => {
+export const drawPoint = col => p => {
   const el = circleCreator(p)
   el.style.fill = col
   svg.appendChild(el)
+  return el
 }
-exports.drawPoint = drawPoint
 
-const drawSeg = (from, to) => {
+export const drawSeg = (from, to) => {
   const f = circleCreator(from)
   f.style.fill = 'lime'
   const t = circleCreator(to)
@@ -30,7 +30,6 @@ const drawSeg = (from, to) => {
   const els = [f, t, l]
   els.forEach(x => svg.appendChild(x))
 }
-exports.drawSeg = drawSeg
 
 function lineCreator(from, to) {
   const [x1, y1] = from
@@ -42,21 +41,8 @@ function lineCreator(from, to) {
   el.setAttribute('x2', x2)
   return el
 }
-// assuming a path of only M and C TODO
-const divideInVector = pd =>
-  pd.reduce((ac, x) => {
-    if (x.type === 'M')
-      ac.push({ point: x.values, vector: null })
-    if (x.type === 'C') {
-      ac[ac.length - 1].vector = [x.values[0], x.values[1]]
-      ac.push({ point: [x.values[2], x.values[3]], vector: [x.values[4], x.values[5]] })
-    }
-    return ac
-  }, [])
 
-exports.divideInVector = divideInVector
-
-exports.drawCubic = function drawCubic(data, c) {
+export const drawCubic = (data, c) => {
   const el = createCubic(data)
   el.style.stroke = c
   svg.appendChild(el)

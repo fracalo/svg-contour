@@ -1,6 +1,6 @@
-const redrawSteep = require('./utils/redraw-steep-curve')
-const contourPathData = require('./utils/contour-path-data')
-const drawLine = require('./utils/draw-line')
+import redrawSteep from './utils/redraw-steep-curve'
+import contourPathData from './utils/contour-path-data'
+import drawLine from './utils/draw-line'
 
 
 const svgContour = (el, op) => {
@@ -42,4 +42,4 @@ const svgContour = (el, op) => {
   return contourPath
 }
 
-module.exports = svgContour
+export default svgContour

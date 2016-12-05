@@ -1,9 +1,10 @@
-const assert = require('assert')
-const Line = require('../src/utils/line')
-const Point = require('../src/utils/point')
+import assert from 'assert'
+import Line from '../src/utils/Line'
+import Point from '../src/utils/Point'
+import Segment from '../src/utils/Segment'
 
 
-let point, line
+let point, line, line2
 
 
 describe('point projection on m1 line', () => {
@@ -40,5 +41,19 @@ describe('point projection on vertical line', () => {
   it('offset line should have inter = 31.4...',() => {
     const inter = 10 // this is empiric
     assert.equal(line2.inter, inter)
+  })
+})
+
+
+xdescribe('creation and interaection of standard with vertical segment offset', () => {
+  let offset = -40, segA, lineA, vertSeg, vertLine
+  before(() => {
+    segA = new Segment([-100, 0], [0, -200])
+    vertSeg = new Segment([0, -200], [0, 200])
+    lineA = ne
+  })
+  it(('testing premises'), () => {
+    assert.equal(segA.m, -2)
+    assert.equal(vertSeg.m, Infinity)
   })
 })

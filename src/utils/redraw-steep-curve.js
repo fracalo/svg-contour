@@ -1,6 +1,6 @@
 
-const Point = require('./point')
-const pipe = require('./pipe')
+import Point from './Point'
+import pipe from './pipe'
 
 // recursive utility for checking and dividing curve
 const splitIfSteep = fr => (curve) => {
@@ -58,7 +58,9 @@ const simplifyPoints = pathdata =>
     return [...ac, ps]
   }, [])
 
-module.exports = off => pipe(
+const redrawSteepCurvePipe = off => pipe(
   redrawSteepCurve(off),
   simplifyPoints
 )
+
+export default redrawSteepCurvePipe

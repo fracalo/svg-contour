@@ -1,6 +1,6 @@
-const assert = require('assert')
-const Line = require('../src/utils/line')
-const Point = require('../src/utils/point')
+import assert from 'assert'
+import Line from '../src/utils/Line'
+import Point from '../src/utils/Point'
 
 
 let point, line

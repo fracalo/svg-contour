@@ -1,8 +1,8 @@
-const Point = require('./point')
-const Line = require('./line')
+import Point from './Point'
+import Line from './Line'
 
 
-class Segment {
+export default class Segment {
   constructor(p1, p2) {
     this.p1 = p1 instanceof Point ? p1 : new Point(p1[0], p1[1])
     this.p2 = p2 instanceof Point ? p2 : new Point(p2[0], p2[1])
@@ -30,6 +30,3 @@ class Segment {
     return this.p1.isEqual(this.p2)
   }
 }
-
-
-module.exports = Segment

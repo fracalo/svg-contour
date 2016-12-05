@@ -1,4 +1,4 @@
-const Point = require('./point')
+import Point from './Point'
 
 
 class Line {

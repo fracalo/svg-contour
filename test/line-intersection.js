@@ -1,10 +1,9 @@
-// const assert = require('assert')
-const assert = require('chai').assert
-const expect = require('chai').expect
+// import assert from 'assert'
+import { assert , expect } from 'chai'
 
-const Line = require('../src/utils/line')
-const Segment = require('../src/utils/segment')
-const Point = require('../src/utils/point')
+import Line from '../src/utils/Line'
+import Segment from '../src/utils/Segment'
+import Point from '../src/utils/Point'
 
 
 
