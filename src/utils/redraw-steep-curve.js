@@ -1,14 +1,20 @@
 
 import Point from './Point'
+import HalfopenLineSegment from './HalfopenLineSegment'
 import pipe from './pipe'
+
 
 // recursive utility for checking and dividing curve
 const splitIfSteep = fr => (curve) => {
   const [p1, c1, c2, p2] = curve
-  const mid = (c1.avg(c2).avg(p1.avg(c1))).avg(c1.avg(c2).avg(p2.avg(c1)))
+
+  const mid = (c1.avg(c2).avg(p1.avg(c1))).avg(c1.avg(c2).avg(p2.avg(c2)))
   const h = mid.dist(p1.avg(p2))
 
-  if (fr * p1.dist(p2) > h)
+  const halfline1 = new HalfopenLineSegment(p1, c1)
+  const halfline2 = new HalfopenLineSegment(p2, c2)
+
+  if (fr * p1.dist(p2) > h && halfline1.intersect(halfline2))
     return inflateCurveToPathSegments(curve) // base case
 
   const curve1 = [p1, p1.avg(c1), c1.avg(c2).avg(p1.avg(c1)), mid]

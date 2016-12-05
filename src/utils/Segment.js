@@ -8,6 +8,9 @@ export default class Segment {
     this.p2 = p2 instanceof Point ? p2 : new Point(p2[0], p2[1])
     this.m = (this.p2.y - this.p1.y) / (this.p2.x - this.p1.x)
     this.reverse = this.p2.x < this.p1.x || (!isFinite(this.m) && this.p1.y > this.p2.y)
+    this.inter = isFinite(this.m) ?
+    this.p1.y + this.m * -this.p1.x :
+    this.p1.x
   }
   getLineOrPoint() {
     return (
@@ -20,11 +23,7 @@ export default class Segment {
     if (this.zeroLength())
       throw new Error('no single line available for zero length segment')
 
-    const inter = isFinite(this.m) ?
-    this.p1.y + this.m * -this.p1.x :
-    this.p1.x
-
-    return new Line(this.m, inter, center)
+    return new Line(this.m, this.inter, center)
   }
   zeroLength() {
     return this.p1.isEqual(this.p2)

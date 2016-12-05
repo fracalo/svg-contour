@@ -97,31 +97,17 @@ const mapToPointOfSeg = segments => segments.map(x => x.p2)
 
 const countourPathData = off => pipe(
     getPoints,
-    x => {
-      x.forEach(p => drawPoint(p, 'black'))
-      return x
-    },
     controlPolygonSegments,
-    tap(x => {
-      console.log('after controlPolygonSegments', x)
-    }),
     offsetControlSegments(off),
     fallbackForZeroLength,
-    (x => {
-      x.forEach(s => {
-        drawSeg(s.p1, s.p2)
-      })
-      return x
-    }),
+    // (x => {
+    //   x.forEach(s => {
+    //     drawSeg(s.p1, s.p2)
+    //   })
+    //   return x
+    // }),
     mapToPointOfSeg
   )
 
 
 export default countourPathData
-
-function tap(f) {
-  return (x) => {
-    f(x)
-    return x
-  }
-}
