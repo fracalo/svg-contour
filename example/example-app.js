@@ -1,9 +1,9 @@
 
 /* global svgContour */
-const testPath = document.querySelector('#flatQ')
+const testPath = document.querySelector('#flat')
 const offsetPath = svgContour(testPath, {
   offset: -40,
-  style: { stroke: 'blue', stokeWidth: 1 }
+  style: { stroke: 'lime', stokeWidth: 1 }
 })
 
 console.log('svgContour returns a ref: ', offsetPath)
